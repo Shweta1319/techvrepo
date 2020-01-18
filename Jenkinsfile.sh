@@ -35,7 +35,8 @@ pipeline {
              
             stage('DeploytoNexus'){
                     steps{
-                      nexusArtifactUploader artifacts: [[artifactId: 'java-maven-junit-helloworld', classifier: '', file: 'target/java-maven-junit-helloworld-2.0-SNAPSHOT.jar', type: 'jar']], credentialsId: '1a4bc6a6-b1af-40b0-9627-dd588c942cbe', groupId: 'com.example', nexusUrl: '54.80.214.39:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'maven-snapshots', version: '2.0-SNAPSHOT'
+                      nexusArtifactUploader artifacts: [[artifactId: 'java-maven-junit-helloworld', classifier: '', file: 'target/java-maven-junit-helloworld-2.0-SNAPSHOT.jar', type: 'jar']], credentialsId: '1a4bc6a6-b1af-40b0-9627-dd588c942cbe', groupId: 'com.example', nexusUrl: '54.80.214.39:8081/', nexusVersion: 'nexus2', protocol: 'http', repository: 'http://54.80.214.39:8081/repository/maven-snapshots/', version: '2.0-SNAPSHOT'
+                      
                     }
              }
              
