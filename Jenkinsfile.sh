@@ -12,7 +12,7 @@ pipeline {
     stages {
             stage('Checkout SCM') {
                     steps {
-                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/TechVerito-Github/devops-java-maven-code.git']]])
+                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Shweta1319/devops-java-maven-code.git']]])
                     }
            }
            
@@ -35,8 +35,7 @@ pipeline {
              
             stage('DeploytoNexus'){
                     steps{
-                     nexusArtifactUploader artifacts: [[artifactId: 'java-maven-junit-helloworld', classifier: '', file: 'target/java-maven-junit-helloworld-2.0-SNAPSHOT.jar', type: 'jar']], credentialsId: '1a4bc6a6-b1af-40b0-9627-dd588c942cbe', groupId: 'com.example', nexusUrl: '54.80.214.39:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '2.0-SNAPSHOT'
-                     
+                        sh 'mvn deploy'                     
                     }
              }
              
