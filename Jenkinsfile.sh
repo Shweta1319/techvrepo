@@ -10,6 +10,12 @@ pipeline {
     }
     
     stages {
+            stage('Checkout SCM') {
+                    steps {
+                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/TechVerito-Github/devops-java-maven-code.git']]])
+                    }
+           }
+           
             stage('Build') {
                     steps {
                         sh 'mvn install'
