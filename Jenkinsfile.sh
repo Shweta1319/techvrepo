@@ -20,6 +20,7 @@ pipeline {
             stage('Build') {
                     steps {
                         sh 'mvn install'
+                        jacoco()
                     }
            }
            
@@ -39,7 +40,8 @@ pipeline {
                         sh 'mvn deploy'                     
                     }
              }
-             stage('SonarQube') {
+             
+             stage('UploadToSonarQube') {
                     steps {
                         sh 'mvn sonar:sonar'
                     }
