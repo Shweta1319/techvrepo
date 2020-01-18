@@ -12,7 +12,6 @@ pipeline {
     stages {
             stage('Checkout SCM') {
                     steps {
-                        cleanWS()
                         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Shweta1319/devops-java-maven-code.git']]])
                     }
            }
@@ -45,4 +44,5 @@ pipeline {
                     }
            }
     }
+    deleteDir()
 }
