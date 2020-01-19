@@ -23,7 +23,7 @@ pipeline {
                           }
             }
     
-    // Building the code with Maven and executing Jacoco
+    // Building the code with Maven and publishing Jacoco reports
             stage('Build') {
                     steps {
                         sh 'mvn install'
@@ -31,7 +31,7 @@ pipeline {
                     }
             }
      
-    // Running Test files and publising the reports
+    // Running Test files and publising the JUnit reports
            stage('Test'){
                     steps{
                       sh 'mvn test'
@@ -50,7 +50,7 @@ pipeline {
                     }
              }
              
-     //  Executing SonarQube and creating reports on SonarQube server  
+     //  Executing Sonar and creating reports on SonarQube server  
              stage('SonarQubeReport') {
                     steps {
                         sh 'mvn sonar:sonar'
