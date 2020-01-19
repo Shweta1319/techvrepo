@@ -1,29 +1,37 @@
+// Start of Pipeline
 pipeline {
 
+// Restricting pipeline to run on master agent
     agent {
       label "master"
      }
-          
+ 
+ // Defining maven and jdk configuration for the pipeline
     tools {
        maven 'Maven' 
        jdk 'Java'      
     }
-    
+   
+ // Defining Stages
     stages {
+    
+    // Checking out GIT code
             stage('Checkout SCM') {
                     steps {
                         deleteDir()
                         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Shweta1319/devops-java-maven-code.git']]])
-                    }
-           }
-           
+                          }
+            }
+    
+    // Building the code with Maven and executing Jacoco
             stage('Build') {
                     steps {
                         sh 'mvn install'
                         jacoco()
                     }
-           }
-           
+            }
+     
+    // Running Test files and publising the reports
            stage('Test'){
                     steps{
                       sh 'mvn test'
@@ -34,17 +42,23 @@ pipeline {
                         }
                     }
              }
-             
-            stage('DeploytoNexus'){
+     
+     // Uploading artifacts to Nexus Repository Manager
+            stage('UploadtoNexus'){
                     steps{
                         sh 'mvn deploy'                     
                     }
              }
              
-             stage('UploadToSonarQube') {
+     //  Executing SonarQube and creating reports on SonarQube server  
+             stage('SonarQubeReport') {
                     steps {
                         sh 'mvn sonar:sonar'
                     }
-           }
+             }
+             
+  // End of Stages 
     }
+    
+//End of Pipeline
 }
