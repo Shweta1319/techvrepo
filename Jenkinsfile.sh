@@ -23,7 +23,7 @@ pipeline {
                           }
             }
     
-    // Building the code with Maven and publishing Jacoco reports
+    // Compiling the code and publishing Jacoco reports
             stage('Build') {
                     steps {
                         sh 'mvn install'
