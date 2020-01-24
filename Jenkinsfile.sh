@@ -33,7 +33,8 @@ pipeline {
      
     // Running Test files and publising the JUnit reports
            stage('Test'){
-                if (Test == true)
+            script {
+              if (Test == true)
                 {
                     steps{
                       sh 'mvn test'
@@ -43,6 +44,7 @@ pipeline {
                             junit 'target/surefire-reports/*.xml'
                         }
                     }
+             }
              }
              }
              
