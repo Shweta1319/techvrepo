@@ -33,6 +33,8 @@ pipeline {
      
     // Running Test files and publising the JUnit reports
            stage('Test'){
+                if (Test == true)
+                {
                     steps{
                       sh 'mvn test'
                     }
@@ -42,6 +44,8 @@ pipeline {
                         }
                     }
              }
+             }
+             
      
      // Uploading artifacts to Nexus Repository Manager
             stage('UploadtoNexus'){
