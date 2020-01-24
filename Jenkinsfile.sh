@@ -36,6 +36,7 @@ pipeline {
                     steps{
                      script{
                         if (Test == true) {
+                        sh "echo Test"
                       sh 'mvn test'
                     }
                     }
